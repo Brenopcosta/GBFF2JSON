@@ -1,0 +1,63 @@
+LOCUS       KZ108064                1000 bp    DNA     linear   CON 01-MAY-2017
+DEFINITION  Epicoccum nigrum strain ICMP 19927 unplaced genomic scaffold
+            scaffold_228, whole genome shotgun sequence.
+ACCESSION   KZ108064 NCTX01000000
+VERSION     KZ108064.1
+DBLINK      BioProject: PRJNA379853
+            BioSample: SAMN06622492
+KEYWORDS    WGS.
+SOURCE      Epicoccum nigrum
+  ORGANISM  Epicoccum nigrum
+            Eukaryota; Fungi; Dikarya; Ascomycota; Pezizomycotina;
+            Dothideomycetes; Pleosporomycetidae; Pleosporales; Pleosporineae;
+            Didymellaceae; Epicoccum.
+REFERENCE   1  (bases 1 to 1000)
+  AUTHORS   Fokin,M., Fleetwood,D., Weir,B.S. and Villas-Boas,S.G.
+  TITLE     Genome sequence of the saprophytic ascomycete Epicoccum nigrum ICMP
+            19927 strain isolated from New Zealand
+  JOURNAL   Genome Announc (2017) In press
+REFERENCE   2  (bases 1 to 1000)
+  AUTHORS   Fokin,M., Fleetwood,D., Weir,B.S. and Villas-Boas,S.G.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (12-APR-2017) School of Biological Sciences, The
+            University of Auckland, Building 110 3a Symonds Street, Auckland
+            1010, New Zealand
+COMMENT     ##Genome-Assembly-Data-START##
+            Assembly Method        :: SPAdes v. 3.10.0
+            Genome Representation  :: Full
+            Expected Final Version :: Yes
+            Genome Coverage        :: 75.0x
+            Sequencing Technology  :: Illumina MiSeq; Illumina HiSeq
+            ##Genome-Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1000
+                     /organism="Epicoccum nigrum"
+                     /mol_type="genomic DNA"
+                     /submitter_seqid="scaffold_228"
+                     /strain="ICMP 19927"
+                     /culture_collection="ICMP:19927"
+                     /db_xref="taxon:105696"
+                     /chromosome="Unknown"
+                     /country="New Zealand: Auckland"
+                     /lat_lon="36.8485 S 174.763 E"
+                     /collection_date="Jan-2007"
+CONTIG      join(NCTX01000651.1:1..1000)
+ORIGIN      
+        1 gagtgcggta tcgtccgtgc ggcacagcaa gggtacaggc atctcttggc atctatgtat
+       61 gcaacaacgc agtatcactg cagggttggg actccttaaa ctacgtgggg cagcttacat
+      121 gtgttgcctt taggccacca gcgtgtcaat tatgtatgta gttatcacaa cagagctggg
+      181 agttcctagc tacgtcagct gacgtgtgtt gcctcaaggc caccagcttg tcaatgtaat
+      241 caccattgta gagtacaggg ctcggagtcc ttagcagggt gttgcagctt acatatgttg
+      301 gtgcaatttc ggagtctttc ccatgaagaa aaaaatgccg cggacacagc ctctgttaaa
+      361 ggccaaagca ttagactcta tcctaggacc cgcctgacag ccctgacccg cgcgctagca
+      421 atcccttagg ctttaccagt ccggagtacg gagtagttct tgacaaccag tcgatgcggt
+      481 cggtatagag gcaactggtc ggcctctggt ctcaagagaa aatgctctcc tcctctgccg
+      541 tgtgttgcag cccaacgtca attgtagttt ggatacgagc tcagggattc catgtcttcg
+      601 tcgctatcta atcaactttc tggtattgct ccccgtgttg cacgtagctt ctgcaggtcg
+      661 tcgtacaata catcgagatc ttcgtccgag aggggcatgg attttcgaat cactgcctaa
+      721 aggtgacgtg acgtctctgc tcgttttaaa cacggtgaac tcagctgatg gatgccttcc
+      781 gcgttctccg attgggaaat accccgagca cgttgcgtgg tgcatagccg aatagtgacc
+      841 cgacgagtag gagaaagacc ctgtgccacc ggaggagcta gccataaatc taggctcgag
+      901 tatagaatag aaaagatagc aagagctgac ttctacatgt atgagcaaat tgttcgactt
+      961 ttgtgagctt gtgcaactgt tgtagaccac actactcttc
+//
