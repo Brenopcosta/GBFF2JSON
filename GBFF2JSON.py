@@ -1,35 +1,31 @@
+import json
 
-def adicionarLOCUS(gbffDict, textoFonte ):
-    while(True):
+def adicionarLOCUS(gbffDict, textoFonte, primeiraLinhaDoGenoma ):
+    gbffDict["LOCUS"] = primeiraLinhaDoGenoma[11:].replace("\"","").replace("\'","")
+
+
+def adicionarDEFINITION(gbffDict, textoFonte):
         linha = textoFonte.readline()
-        
-        if (linha[:10] == "DEFINITION"):
-            return linha
-        
-        gbffDict["LOCUS"] = linha[11:]
-
-
-def adicionarDEFINITION(gbffDict, textoFonte, primeiraLinhaDefinition):
-        gbffDict["DEFINITION"] = primeiraLinhaDefinition[10:]
+        gbffDict["DEFINITION"] = linha[10:].replace("\"","").replace("\'","")
 
         while(True):
             linha = textoFonte.readline()
             if (linha[:9] == "ACCESSION"):
                 return linha
 
-            gbffDict["DEFINITION"] = gbffDict["DEFINITION"] + linha[12:]
+            gbffDict["DEFINITION"] = gbffDict["DEFINITION"] + linha[12:].replace("\"","").replace("\'","")
 
 def adicionarACCESSION(gbffDict, textoFonte, primeiraLinhaAccession):
-    gbffDict["ACCESSION"] = primeiraLinhaAccession[12:]
+    gbffDict["ACCESSION"] = primeiraLinhaAccession[12:].replace("\"","").replace("\'","")
 
 def adicionarVERSION(gbffDict, textoFonte):
     linha = textoFonte.readline()
-    gbffDict["VERSION"] = linha[12:]
+    gbffDict["VERSION"] = linha[12:].replace("\"","").replace("\'","")
 
 def adicionarDBLINK(gbffDict, textoFonte):
     linha = textoFonte.readline()
     if (linha[:6] == "DBLINK"):
-        gbffDict["DBLINK"] = linha[12:]
+        gbffDict["DBLINK"] = linha[12:].replace("\"","").replace("\'","")
         
         while(True):
             linha = textoFonte.readline()
@@ -37,32 +33,32 @@ def adicionarDBLINK(gbffDict, textoFonte):
             if (linha[:8] == "KEYWORDS"):
                 return linha
                 
-            gbffDict["DBLINK"] = gbffDict["DBLINK"] + linha[12:]
+            gbffDict["DBLINK"] = gbffDict["DBLINK"] + linha[12:].replace("\"","").replace("\'","")
     
     else:
         return linha
 
 def adicionarKEYWORDS(gbffDict, textoFonte, primeiraLinhaKeywords):
-    gbffDict["KEYWORDS"] = primeiraLinhaKeywords[12:]
+    gbffDict["KEYWORDS"] = primeiraLinhaKeywords[12:].replace("\"","").replace("\'","")
 
 def adicionarSOURCE(gbffDict, textoFonte):
     linha = textoFonte.readline()
-    gbffDict["SOURCE"] = linha[12:]
+    gbffDict["SOURCE"] = linha[12:].replace("\"","").replace("\'","").replace("\'","")
 
 def adicionarORGANISM(gbffDict, textoFonte):
     primeiraLinhaOrganism = textoFonte.readline()
-    gbffDict["ORGANISM"] = primeiraLinhaOrganism[11:]
+    gbffDict["ORGANISM"] = primeiraLinhaOrganism[11:].replace("\"","").replace("\'","")
 
     while(True):
         linha = textoFonte.readline()
         if(linha[:9] == "REFERENCE"):
             return linha
 
-        gbffDict["ORGANISM"] = gbffDict["ORGANISM"] + linha[12:]
+        gbffDict["ORGANISM"] = gbffDict["ORGANISM"] + linha[12:].replace("\"","").replace("\'","")
 
 
 def adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference):
-    gbffDict["REFERENCE"] = primeiraLinhaReference[12:]
+    gbffDict["REFERENCE"] = primeiraLinhaReference[12:].replace("\"","").replace("\'","")
 
     while(True):
         linha = textoFonte.readline()
@@ -73,22 +69,22 @@ def adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference):
         elif(linha[:8] == "FEATURES"):
             return linha    
         else:
-            gbffDict["REFERENCE"] = gbffDict["REFERENCE"] + linha[12:]
+            gbffDict["REFERENCE"] = gbffDict["REFERENCE"] + linha[12:].replace("\"","").replace("\'","")
 
 def adicionarCOMMENT(gbffDict, textoFonte , primeiraLinhaComment):
     if(primeiraLinhaComment[:7] != "COMMENT"):
         return primeiraLinhaComment
     
-    gbffDict["COMMENT"] = primeiraLinhaComment[12:]
+    gbffDict["COMMENT"] = primeiraLinhaComment[12:].replace("\"","").replace("\'","")
 
     while(True):
         linha = textoFonte.readline()
         if(linha[:8] == "FEATURES"):
             return linha
-        gbffDict["COMMENT"] = gbffDict["COMMENT"] + linha[12:]
+        gbffDict["COMMENT"] = gbffDict["COMMENT"] + linha[12:].replace("\"","").replace("\'","")
 
 def adicionarFEATURES(gbffDict, textoFonte , primeiraLinhaFeatures):
-    gbffDict["FEATURES"] = primeiraLinhaFeatures[12:]
+    gbffDict["FEATURES"] = primeiraLinhaFeatures[12:].replace("\"","").replace("\'","")
     while(True):
         linha = textoFonte.readline()
         if(linha[:6] == "CONTIG"):
@@ -96,14 +92,14 @@ def adicionarFEATURES(gbffDict, textoFonte , primeiraLinhaFeatures):
         elif(linha[:6] == "ORIGIN"):
             return linha
         else:
-            gbffDict["FEATURES"] = gbffDict["FEATURES"] + linha[5:]
+            gbffDict["FEATURES"] = gbffDict["FEATURES"] + linha[5:].replace("\"","").replace("\'","")
 
 
 def adicionarCONTIG(gbffDict, textoFonte , primeiraLinhaContig):
     if(primeiraLinhaContig[:7] != "CONTIG"):
         return primeiraLinhaContig
     
-    gbffDict["CONTIG"] = primeiraLinhaFeatures[12:]
+    gbffDict["CONTIG"] = primeiraLinhaFeatures[12:].replace("\"","").replace("\'","")
     return textoFonte.readline()
 
 
@@ -113,37 +109,61 @@ def adicionarORIGIN(gbffDict, textoFonte , primeiraLinhaOrign):
         linha = textoFonte.readline()
         if(linha[:2] == "//"):
             return
-        print("Adicionando linha de numero" + linha[:12])
-        gbffDict["ORIGIN"] = gbffDict["ORIGIN"] + linha
+        #print("Adicionando linha de numero" + linha[:12])
+        gbffDict["ORIGIN"] = gbffDict["ORIGIN"] + linha.replace("\"","").replace("\'","")
+
 
 def main():
-    gbffDict = dict()
-    with open('example.gbff', 'r') as textoFonte:            
+    outPutDictionary = dict()
+    
+    with open('example2.gbff', 'r') as textoFonte:            
         
-        primeiraLinhaDefinition = adicionarLOCUS(gbffDict, textoFonte)
-        
-        primeiraLinhaAccession = adicionarDEFINITION(gbffDict, textoFonte, primeiraLinhaDefinition)
-        
-        adicionarACCESSION(gbffDict, textoFonte, primeiraLinhaAccession)
-        
-        adicionarVERSION(gbffDict, textoFonte)
+        primeiraLinhaDoGenoma = textoFonte.readline()
 
-        primeiraLinhaKeywords = adicionarDBLINK(gbffDict, textoFonte)
+        fimDoArquivo = False
 
-        adicionarKEYWORDS(gbffDict, textoFonte, primeiraLinhaKeywords)
-        
-        adicionarSOURCE(gbffDict, textoFonte)
+        identificacaoGenoma = 0
 
-        primeiraLinhaReference = adicionarORGANISM(gbffDict, textoFonte)
+        while (fimDoArquivo == False):
+            gbffDict = dict()
+            
+            adicionarLOCUS(gbffDict, textoFonte, primeiraLinhaDoGenoma)
+            
+            primeiraLinhaAccession = adicionarDEFINITION(gbffDict, textoFonte)
+            
+            adicionarACCESSION(gbffDict, textoFonte, primeiraLinhaAccession)
+            
+            adicionarVERSION(gbffDict, textoFonte)
 
-        primeiraLinhaComment = adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference)
+            primeiraLinhaKeywords = adicionarDBLINK(gbffDict, textoFonte)
 
-        primeiraLinhaFeatures = adicionarCOMMENT(gbffDict, textoFonte , primeiraLinhaComment)
-        
-        primeiraLinhaContig = adicionarFEATURES(gbffDict, textoFonte , primeiraLinhaFeatures)
+            adicionarKEYWORDS(gbffDict, textoFonte, primeiraLinhaKeywords)
+            
+            adicionarSOURCE(gbffDict, textoFonte)
 
-        primeiraLinhaOrigin = adicionarCONTIG(gbffDict, textoFonte , primeiraLinhaContig)
-        
-        adicionarORIGIN(gbffDict, textoFonte , primeiraLinhaOrigin)
+            primeiraLinhaReference = adicionarORGANISM(gbffDict, textoFonte)
 
-    return gbffDict
+            primeiraLinhaComment = adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference)
+
+            primeiraLinhaFeatures = adicionarCOMMENT(gbffDict, textoFonte , primeiraLinhaComment)
+            
+            primeiraLinhaContig = adicionarFEATURES(gbffDict, textoFonte , primeiraLinhaFeatures)
+
+            primeiraLinhaOrigin = adicionarCONTIG(gbffDict, textoFonte , primeiraLinhaContig)
+            
+            adicionarORIGIN(gbffDict, textoFonte , primeiraLinhaOrigin)
+
+            outPutDictionary[identificacaoGenoma] = gbffDict
+
+            identificacaoGenoma +=1
+            
+            linhaAposGenoma = textoFonte.readline()
+
+            if (linhaAposGenoma == ""):
+                break
+            
+            primeiraLinhaDoGenoma = linhaAposGenoma
+    
+    jsonRetorno = json.dumps(outPutDictionary)
+
+    return jsonRetorno
