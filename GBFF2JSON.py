@@ -57,19 +57,30 @@ def adicionarORGANISM(gbffDict, textoFonte):
         gbffDict["ORGANISM"] = gbffDict["ORGANISM"] + linha[12:].replace("\"","").replace("\'","")
 
 
-def adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference):
-    gbffDict["REFERENCE"] = primeiraLinhaReference[12:].replace("\"","").replace("\'","")
+def gerenciadorDeAdicaoDeReference(gbffDict, textoFonte , primeiraLinhaReference):
+    dicionarioDeReference = dict()
+    contadorDeReference = 0
+
+    linha = adicionarREFERENCE(dicionarioDeReference, contadorDeReference, textoFonte, primeiraLinhaReference)
+
+    gbffDict["REFERENCE"] = dicionarioDeReference
+
+    return linha
+
+def adicionarREFERENCE(dicionarioDeReference, contadorDeReference, textoFonte, primeiraLinhaReference):
+    dicionarioDeReference[contadorDeReference] = primeiraLinhaReference.replace("\"","").replace("\'","")
 
     while(True):
         linha = textoFonte.readline()
         if(linha[:9] == "REFERENCE"):
-            return adicionarREFERENCE(gbffDict, textoFonte , linha)
+            contadorDeReference += 1
+            return adicionarREFERENCE(dicionarioDeReference, contadorDeReference, textoFonte, linha)
         elif(linha[:7] == "COMMENT"):
             return linha
         elif(linha[:8] == "FEATURES"):
             return linha    
         else:
-            gbffDict["REFERENCE"] = gbffDict["REFERENCE"] + linha[12:].replace("\"","").replace("\'","")
+            dicionarioDeReference[contadorDeReference] = dicionarioDeReference[contadorDeReference] + linha[12:].replace("\"","").replace("\'","")
 
 def adicionarCOMMENT(gbffDict, textoFonte , primeiraLinhaComment):
     if(primeiraLinhaComment[:7] != "COMMENT"):
@@ -109,7 +120,6 @@ def adicionarORIGIN(gbffDict, textoFonte , primeiraLinhaOrign):
         linha = textoFonte.readline()
         if(linha[:2] == "//"):
             return
-        #print("Adicionando linha de numero" + linha[:12])
         gbffDict["ORIGIN"] = gbffDict["ORIGIN"] + linha.replace("\"","").replace("\'","")
 
 
@@ -143,7 +153,7 @@ def main():
 
             primeiraLinhaReference = adicionarORGANISM(gbffDict, textoFonte)
 
-            primeiraLinhaComment = adicionarREFERENCE(gbffDict, textoFonte , primeiraLinhaReference)
+            primeiraLinhaComment = gerenciadorDeAdicaoDeReference(gbffDict, textoFonte , primeiraLinhaReference)
 
             primeiraLinhaFeatures = adicionarCOMMENT(gbffDict, textoFonte , primeiraLinhaComment)
             
